@@ -15,14 +15,46 @@ apt-get install -y nvidia-docker2
 
 ## 3. Build Dockerimage
 
-### Build Image
+### 3.1 Build Image
 
 docker build -t point_painting .
 
-### Run Container from Image
+### 3.2 Run Container from Image
 
 sudo docker run --gpus all --name point_painting -it point_painting
 
-### Restart Container
+### 3.3 Restart Container
 
 docker start -i point_painting
+
+## 4. Using Point Painting
+
+### 4.1 Install OpenPCDet
+
+$ cd PointPainting/detector
+$ python3 setup.py develop
+
+### 4.2 Downloading Kitty Dataset
+
+### 4.3.1 Painting with DeepLabV3
+
+$ cd painting
+$ python painting.py
+
+### 4.3.2 Painting with HMA
+
+$ cd painting
+$ sh generate_hma_score.sh
+
+### 4.4 Lidar Detector Training
+
+$ cd detector
+$ python -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
+$ cd tools
+$ python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
+
+### 4.5 Running Inference
+
+$ pip install mayavi
+$ cd tools
+$ python demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
