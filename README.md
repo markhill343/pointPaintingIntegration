@@ -26,7 +26,7 @@ docker build -t point_painting .
 ### 3.2 Run Container from Image
 
 ```
-sudo docker run --gpus all --name point_painting -it point_painting
+sudo docker run --gpus all --name point_painting -it -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
 ```
 
 ### 3.3 Restart Container
@@ -44,13 +44,21 @@ $ cd PointPainting/detector
 $ python3 setup.py develop
 ```
 
-### 4.2 Downloading Kitty Dataset
+### 4.2 Mount Kitti Data-Set (if not already mounted @run command)
+
+docker run -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti1 point_painting
+
 
 ### 4.3.1 Painting with DeepLabV3
 
+
+
 ```
 $ cd painting
-$ python painting.py
+$ apt-get wget
+$ sh get_deeplabv3plus_model.sh
+$ pip3 install opencv-python-headless
+$ python3 painting.py
 ```
 
 ### 4.3.2 Painting with HMA
@@ -64,6 +72,9 @@ $ sh generate_hma_score.sh
 
 ```
 $ cd detector
+pip3 install scipy
+pip3 install scikit-image
+pip3 install open3d
 $ python -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
 $ cd tools
 $ python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml

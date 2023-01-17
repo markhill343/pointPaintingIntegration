@@ -27,9 +27,12 @@ RUN pip3 install \
 torch==1.7.0 \
 torchvision==0.8.0 \
 torchaudio==0.7.0 \
+matplotlib \
+tqdm \
+wget \
 spconv \
 terminaltables \
-mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html
+mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html
 
 
 ENV CUDA_HOME "/usr/local/cuda-10.1"
