@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-devel-ubuntu18.04
+FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
 WORKDIR /tmp
 
 #CUDA
@@ -19,6 +19,10 @@ python3-pip python3.7-dev \
 python3.7 
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
 
+RUN apt-get update && apt-get install -y \
+wget libgl1-mesa-glx vim libboost-all-dev
+
+
 # PIP -> if it doesnt work python -m pip install --upgrade pip
 RUN pip3 install --upgrade pip
 
@@ -27,10 +31,13 @@ RUN pip3 install \
 torch==1.7.0 \
 torchvision==0.8.0 \
 torchaudio==0.7.0 \
+scipy \
+scikit-image \
+open3d \
 matplotlib \
+opencv-python-headless \
 tqdm \
 wget \
-spconv \
 terminaltables \
 mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html
 

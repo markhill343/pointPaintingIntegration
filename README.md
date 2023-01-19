@@ -72,10 +72,26 @@ $ sh generate_hma_score.sh
 
 ```
 $ cd detector
-pip3 install scipy
-pip3 install scikit-image
-pip3 install open3d
-$ python -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
+
+vim /tmp/PointPainting/detector/pcdet/datasets/kitti/painted_kitti_dataset.py
+Line 442 = dataset_cfg = EasyDict(yaml.load(open(sys.argv[2]), Loader=yaml.SafeLoader))
+
+## Install Cmake
+wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz
+tar xzf cmake-3.13.4.tar.gz
+cd cmake-3.13.4
+./bootstrap
+make
+sudo make install
+
+## Install spconv
+git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
+sudo apt-get install libboost-all-dev
+
+
+
+
+$ python3 -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
 $ cd tools
 $ python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ```
