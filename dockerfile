@@ -35,7 +35,6 @@ RUN cd cmake-3.13.4 && \
     make install
 
 #Update Python to 3.7
-
 # Remove existing Python 3.6 installation
 RUN apt-get remove -y python3.6 python3.6-dev
 
