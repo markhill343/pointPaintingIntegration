@@ -47,7 +47,7 @@ $ python3 setup.py develop
 ### 4.2 Mount Kitti Data-Set (if not already mounted @run command)
 
 ```
-$ docker run -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti1 point_painting
+$ docker run -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
 ```
 
 ### 4.3.1 Painting with DeepLabV3
