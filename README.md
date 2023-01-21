@@ -73,7 +73,7 @@ $ sh generate_hma_score.sh
 $ cd detector
 $ python3 -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
 $ cd tools
-$ python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
+$ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ```
 
 ### 4.5 Running Inference
@@ -81,5 +81,5 @@ $ python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ```
 $ pip install mayavi
 $ cd tools
-$ python demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
+$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
 ```
