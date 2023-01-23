@@ -61,24 +61,24 @@ RUN apt-get install -y python3.7-dev
 # Remove downloaded source code and unnecessary dependencies
 RUN rm -rf Python-3.7.10
 
-#Generic python installations
+# Generic python installations
 RUN apt-get update && apt-get install -y \
 python3-pip \
 git 
 
-#Install missing system librarys
+# Install missing system librarys
 RUN apt-get update && apt-get install -y \
 libgl1-mesa-glx libboost-all-dev
 
-#Install pip and git
+# Install pip and git
 RUN apt-get update && apt-get install -y \
 python3-pip \
 git
 
-#Upgrade pip
+# Upgrade pip
 RUN pip3 install --upgrade pip
 
-#Install pip packages
+# Install pip packages
 RUN pip3 install \
 torch==1.7.0 \
 torchvision==0.8.0 \
@@ -92,15 +92,21 @@ tqdm \
 terminaltables \
 mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html
 
-#Setting Home ENV for CUDA
+# Setting Home ENV for CUDA
 ENV CUDA_HOME "/usr/local/cuda-10.1"
 
-#Installing spconv
+# Installing spconv
 RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
 RUN pip install -e ./spconv
 
-#Cloning pointPainting
+# Cloning pointPainting
 RUN git clone https://github.com/markhill343/PointPainting.git
 
-#Setting the default shell
+# Cleaning up
+RUN rm -rf \
+Python-3.7.10.tar.xz \
+cmake-3.13.4.tar.gz \
+rm cmake-3.13.4.tar.gz 
+
+# Setting the default shell
 ENV SHELL /bin/bash
