@@ -101,7 +101,7 @@ RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
 RUN pip install -e .
 
 #Cloning pointPainting
-RUN git clone https://github.com/Song-Jingyu/PointPainting.git
+RUN git clone https://github.com/markhill343/PointPainting.git
 
 #Setting the default shell
 ENV SHELL /bin/bash
