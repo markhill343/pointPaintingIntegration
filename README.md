@@ -20,19 +20,20 @@ apt-get install -y nvidia-docker2
 ### 3.1 Build Image
 
 ```
-docker build -t point_painting .
+$ sudo docker build -t point_painting .
 ```
 
 ### 3.2 Run Container from Image
 
 ```
-sudo docker run --gpus all --name point_painting -it -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
+$ sudo docker run --gpus all --name point_painting -it -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
+$ sudo docker run --gpus all --name point_painting -it point_painting
 ```
 
 ### 3.3 Restart Container
 
 ```
-docker start -i point_painting
+$ docker start -i point_painting
 ```
 
 ## 4. Using Point Painting
@@ -44,14 +45,7 @@ $ cd PointPainting/detector
 $ python3 setup.py develop
 ```
 
-### 4.2 Mount Kitti Data-Set (if not already mounted @run command)
-
-docker run -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti1 point_painting
-
-
-### 4.3.1 Painting with DeepLabV3
-
-
+### 4.2.1 Painting with DeepLabV3
 
 ```
 $ cd painting
@@ -61,45 +55,26 @@ $ pip3 install opencv-python-headless
 $ python3 painting.py
 ```
 
-### 4.3.2 Painting with HMA
+### 4.2.2 Painting with HMA
 
 ```
 $ cd painting
 $ sh generate_hma_score.sh
 ```
 
-### 4.4 Lidar Detector Training
+### 4.3 Lidar Detector Training
 
 ```
 $ cd detector
-
-vim /tmp/PointPainting/detector/pcdet/datasets/kitti/painted_kitti_dataset.py
-Line 442 = dataset_cfg = EasyDict(yaml.load(open(sys.argv[2]), Loader=yaml.SafeLoader))
-
-## Install Cmake
-wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz
-tar xzf cmake-3.13.4.tar.gz
-cd cmake-3.13.4
-./bootstrap
-make
-sudo make install
-
-## Install spconv
-git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
-sudo apt-get install libboost-all-dev
-
-
-
-
 $ python3 -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
 $ cd tools
-$ python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
+$ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ```
 
-### 4.5 Running Inference
+### 4.4 Running Inference
 
 ```
 $ pip install mayavi
 $ cd tools
-$ python demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
+$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
 ```
