@@ -1,7 +1,7 @@
 FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
 WORKDIR /tmp
 
-#CUDA
+# CUDA
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_VISIBLE_DEVICES=all
 
@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
     xz-utils \
     zlib1g-dev
 
-#Install CMake
+# Install CMake
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.13.4/cmake-3.13.4.tar.gz
 RUN tar xzf cmake-3.13.4.tar.gz
 RUN cd cmake-3.13.4 && \
@@ -34,7 +34,7 @@ RUN cd cmake-3.13.4 && \
     make && \
     make install
 
-#Update Python to 3.7
+# Update Python to 3.7
 # Remove existing Python 3.6 installation
 RUN apt-get remove -y python3.6 python3.6-dev
 
