@@ -46,8 +46,9 @@ RUN wget https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
 RUN tar xJf Python-3.7.10.tar.xz
 
 # Build and install Python 3.7
+# --enable-optimizations removed build takes too long
 RUN cd Python-3.7.10 && \
-    ./configure --enable-optimizations && \
+    ./configure  && \
     make && \
     make install
 
