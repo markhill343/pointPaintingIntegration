@@ -106,7 +106,7 @@ RUN git clone https://github.com/markhill343/PointPainting.git
 RUN rm -rf \
 Python-3.7.10.tar.xz \
 cmake-3.13.4.tar.gz \
-rm cmake-3.13.4.tar.gz 
+cmake-3.13.4.tar.gz 
 
 # Setting the default shell
 ENV SHELL /bin/bash
