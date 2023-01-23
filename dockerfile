@@ -5,6 +5,9 @@ WORKDIR /tmp
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_VISIBLE_DEVICES=all
 
+# Run dpkg without interactive dialog
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
