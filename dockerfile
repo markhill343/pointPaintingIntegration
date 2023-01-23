@@ -1,7 +1,7 @@
 FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
 WORKDIR /tmp
 
-# CUDA
+#CU# CUDA
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 ENV NVIDIA_VISIBLE_DEVICES=all
 
@@ -106,7 +106,8 @@ RUN git clone https://github.com/markhill343/PointPainting.git
 RUN rm -rf \
 Python-3.7.10.tar.xz \
 cmake-3.13.4.tar.gz \
-rm cmake-3.13.4.tar.gz 
+cmake-3.13.4 \
+spconv
 
 # Setting the default shell
 ENV SHELL /bin/bash

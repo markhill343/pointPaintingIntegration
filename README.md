@@ -49,9 +49,7 @@ $ python3 setup.py develop
 
 ```
 $ cd painting
-$ apt-get wget
 $ sh get_deeplabv3plus_model.sh
-$ pip3 install opencv-python-headless
 $ python3 painting.py
 ```
 
