@@ -64,6 +64,7 @@ $ sh generate_hma_score.sh
 
 ```
 $ cd detector
+'yaml.load(open(sys.argv[2]), Loader=yaml.FullLoader)'.
 $ python3 -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
 $ cd tools
 $ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
