@@ -100,9 +100,6 @@ ENV CUDA_HOME "/usr/local/cuda-10.1"
 RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
 RUN pip install -e ./spconv
 
-# Cloning pointPainting
-RUN git clone https://github.com/markhill343/PointPainting.git
-
 # Cleaning up
 RUN rm -rf \
 Python-3.7.10.tar.xz \
