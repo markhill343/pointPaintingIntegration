@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.6.0-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04
 WORKDIR /tmp
 
 #CU# CUDA
@@ -92,10 +92,10 @@ tqdm \
 terminaltables \
 numba==0.53.0
 
-RUN pip3 install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu116/torch1.13.0/index.html
+RUN pip3 install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/torch1.13.0/index.html
 
 # Setting Home ENV for CUDA
-ENV CUDA_HOME "/usr/local/cuda-11.6"
+ENV CUDA_HOME "/usr/local/cuda-11.7"
 
 # Installing spconv
 RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
