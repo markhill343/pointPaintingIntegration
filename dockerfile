@@ -90,8 +90,9 @@ matplotlib \
 opencv-python-headless \
 tqdm \
 terminaltables \
-numba==0.53.0 \
-mmcv-full==2.0.0 -f https://download.openmmlab.com/mmcv/dist/cu116/torch1.13.0/index.html
+numba==0.53.0
+
+RUN pip3 install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu116/torch1.13.0/index.html
 
 # Setting Home ENV for CUDA
 ENV CUDA_HOME "/usr/local/cuda-11.6"
