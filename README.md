@@ -20,20 +20,20 @@ apt-get install -y nvidia-docker2
 ### 3.1 Build Image
 
 ```
-$ sudo docker build -t point_painting .
+$ sudo docker build -t point_painting_rtx3070ti .
 ```
 
 ### 3.2 Run Container from Image
 
 ```
 $ sudo docker run --gpus all --name point_painting -it -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
-$ sudo docker run --gpus all --name point_painting -it point_painting
+$ sudo docker run --gpus all --name point_painting_rtx3070ti -it -v ~/Documents/thesis/PointPainting:/tmp point_painting_rtx3070ti
 ```
 
 ### 3.3 Restart Container
 
 ```
-$ docker start -i point_painting
+$ docker start -i point_painting_rtx3070ti 
 ```
 
 ## 4. Using Point Painting
