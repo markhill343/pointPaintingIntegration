@@ -20,7 +20,7 @@ apt-get install -y nvidia-docker2
 ### 3.1 Build Image
 
 ```
-$ sudo docker build -t point_painting_rtx3070ti .
+$ sudo docker build -t point_painting_rtx3070ti_cu11.6 .
 ```
 
 ### 3.2 Run Container from Image
