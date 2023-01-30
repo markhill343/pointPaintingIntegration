@@ -26,7 +26,7 @@ $ sudo docker build -t point_painting_rtx3070ti .
 ### 3.2 Run Container from Image
 
 ```
-$ sudo docker run --gpus all --name point_painting_rtx3070ti -it -v ~/Documents/thesis/PointPainting:/tmp point_painting_rtx3070ti
+$ sudo docker run --gpus all --name point_painting_rtx3070ti -it -v ~/Documents/thesis/PointPainting:/tmp/PointPainting point_painting_rtx3070ti
 ```
 
 ### 3.3 Restart Container
