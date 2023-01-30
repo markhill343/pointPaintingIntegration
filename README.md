@@ -32,7 +32,7 @@ $ sudo docker run --gpus all --name point_painting_rtx3070ti -it -v ~/Documents/
 ### 3.3 Restart Container
 
 ```
-$ docker start -i point_painting_rtx3070ti 
+$ sudo docker start -i point_painting_rtx3070ti 
 ```
 
 ## 4. Using Point Painting
@@ -73,5 +73,7 @@ $ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ```
 $ pip install mayavi
 $ cd tools
+$ chmod +x /usr/local/lib/python3.7/site-packages/ninja-1.11.1-py3.7-linux-x86_64.egg/ninja/data/bin/ninja
+Check if right version from spconv is used
 $ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
 ```

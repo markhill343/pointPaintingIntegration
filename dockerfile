@@ -98,7 +98,7 @@ ENV CUDA_HOME "/usr/local/cuda-10.1"
 
 # Installing spconv
 RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
-RUN pip install -e ./spconv
+RUN pip3 install -e ./spconv
 
 # Cleaning up
 RUN rm -rf \
