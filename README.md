@@ -26,13 +26,13 @@ $ sudo docker build -t point_painting_rtx3070ti_cu11.7 .
 ### 3.2 Run Container from Image
 
 ```
-$ sudo docker run --gpus all --name point_painting_rtx3070ti_cu11.6 -it -v ~/Documents/thesis/PointPainting:/tmp/PointPainting point_painting_rtx3070ti_cu11.6
+$ sudo docker run --gpus all --name point_painting_rtx3070ti_cu11.7 -it -v ~/Documents/thesis/PointPainting:/tmp/PointPainting point_painting_rtx3070ti_cu11.7
 ```
 
 ### 3.3 Restart Container
 
 ```
-$ sudo docker start -i point_painting_rtx3070ti 
+$ sudo docker start -i point_painting_rtx3070ti_cu11.7
 ```
 
 ## 4. Using Point Painting
