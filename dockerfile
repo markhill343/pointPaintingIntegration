@@ -98,7 +98,7 @@ RUN pip3 install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu
 ENV CUDA_HOME "/usr/local/cuda-11.7"
 
 # Installing spconv
-RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
+RUN git clone --recursive https://github.com/traveller59/spconv.git
 RUN pip3 install -e ./spconv
 
 # Cleaning up
