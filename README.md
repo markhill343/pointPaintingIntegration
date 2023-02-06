@@ -26,7 +26,7 @@ $ sudo docker build -t point_painting .
 ### 3.2 Run Container from Image
 
 ```
-$ sudo docker run --gpus all --name point_painting -it -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
+$ sudo docker run --gpus all --name point_painting -it -v /mnt/d/git/pointPaintingIntegration/PointPainting:/tmp/PointPainting point_painting
 $ sudo docker run --gpus all --name point_painting -it point_painting
 ```
 
