@@ -74,5 +74,5 @@ $ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ```
 $ pip install mayavi
 $ cd tools
-$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
+$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt /tmp/PointPainting/detector/output/kitti_models/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth --data_path /tmp/PointPainting/detector/data/kitti/testing/painted_lidar/ --ext .npy
 ```
