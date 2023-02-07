@@ -21,6 +21,15 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libsqlite3-dev \
     libssl-dev \
+    libxcb-keysyms1 \
+    libxcb-randr0 \
+    libxcb-xinerama0 \ 
+    libxkbcommon-x11-0 \
+    libgl1 \
+    libxcb-xkb1 \ 
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-render-util0 \
     zlib1g-dev \
     tk-dev \
     openssl \
@@ -110,6 +119,3 @@ cmake-3.13.4
 
 # Setting the default shell
 ENV SHELL /bin/bash
-
-#Updating
-RUN apt-get update
