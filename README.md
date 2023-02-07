@@ -20,14 +20,18 @@ apt-get install -y nvidia-docker2
 ### 3.1 Build Image
 
 ```
-$ sudo docker build -t point_painting .
+$ sudo docker build -t point_painting2 .
 ```
 
 ### 3.2 Run Container from Image
 
+
 ```
-$ sudo docker run --gpus all --name point_painting -it -v /mnt/d/kitti/kitti:/tmp/PointPainting/detector/data/kitti point_painting
-$ sudo docker run --gpus all --name point_painting -it point_painting
+pip install rocker
+```
+
+```
+$ sudo rocker --nvidia --x11 --env NVIDIA_DRIVER_CAPABILITIES=all --volume /mnt/d/git/pointPaintingIntegration/PointPainting:/tmp/PointPainting -- point_painting1
 ```
 
 ### 3.3 Restart Container
@@ -64,7 +68,6 @@ $ sh generate_hma_score.sh
 
 ```
 $ cd detector
-'yaml.load(open(sys.argv[2]), Loader=yaml.FullLoader)'.
 $ python3 -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
 $ cd tools
 $ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
@@ -73,7 +76,18 @@ $ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ### 4.4 Running Inference
 
 ```
-$ pip install mayavi
 $ cd tools
-$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
+$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt /tmp/PointPainting/detector/output/kitti_models/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth --data_path /tmp/PointPainting/detector/data/kitti/training/painted_lidar/ --ext .npy
 ```
+
+Solutions for XServer Errors
+glxinfo -B
+LIBGL_ALWAYS_INDIRECT=0
+
+sudo ln -s /usr/lib/x86_64-linux-gnu/libxcb-util.so.0.0.0 /usr/lib/x86_64-linux-gnu/libxcb-util.so.1
+
+
+Possible Solutions for XServer Errors
+
+export MESA_GL_VERSION_OVERRIDE=3.2
+apt-get install llvm-dev

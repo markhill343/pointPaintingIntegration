@@ -2,7 +2,7 @@ FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
 WORKDIR /tmp
 
 #CU# CUDA
-ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,display
 ENV NVIDIA_VISIBLE_DEVICES=all
 
 # Run dpkg without interactive dialog
@@ -79,7 +79,7 @@ git
 RUN pip3 install --upgrade pip
 
 # Install pip packages
-RUN pip3 install \
+RUN pip install \
 torch==1.7.0 \
 torchvision==0.8.0 \
 torchaudio==0.7.0 \
@@ -90,7 +90,10 @@ matplotlib \
 opencv-python-headless \
 tqdm \
 terminaltables \
-mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html
+numba==0.53.0 \
+mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html \
+mayavi \
+pyqt5
 
 # Setting Home ENV for CUDA
 ENV CUDA_HOME "/usr/local/cuda-10.1"
@@ -99,15 +102,14 @@ ENV CUDA_HOME "/usr/local/cuda-10.1"
 RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
 RUN pip install -e ./spconv
 
-# Cloning pointPainting
-RUN git clone https://github.com/markhill343/PointPainting.git
-
 # Cleaning up
 RUN rm -rf \
 Python-3.7.10.tar.xz \
 cmake-3.13.4.tar.gz \
-cmake-3.13.4 \
-spconv
+cmake-3.13.4 
 
 # Setting the default shell
 ENV SHELL /bin/bash
+
+#Updating
+RUN apt-get update
