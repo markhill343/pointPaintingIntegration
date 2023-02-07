@@ -2,7 +2,7 @@ FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
 WORKDIR /tmp
 
 #CU# CUDA
-ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,display
 ENV NVIDIA_VISIBLE_DEVICES=all
 
 # Run dpkg without interactive dialog
@@ -92,7 +92,8 @@ tqdm \
 terminaltables \
 numba==0.53.0 \
 mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html \
-mayavi
+mayavi \
+pyqt5
 
 # Setting Home ENV for CUDA
 ENV CUDA_HOME "/usr/local/cuda-10.1"
