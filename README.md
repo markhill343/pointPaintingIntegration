@@ -20,23 +20,23 @@ apt-get install -y nvidia-docker2
 ### 3.1 Build Image
 
 ```
-$ sudo docker build -t point_painting_rtx3070ti_cu11.7 .
+$ sudo docker build -t point_painting_rtx3070ti_cu11.7_final .
 ```
 
 ### 3.2 Run Container from Image
 
 ```
-$ sudo docker run --gpus all --name point_painting_rtx3070ti_cu11.7 -it -v ~/Documents/thesis/pointPaintingIntegration/PointPainting:/tmp/PointPainting point_painting_rtx3070ti_cu11.7
+pip install rocker
 ```
 
 ```
-$ sudo rocker --nvidia --x11 --volume ~/Documents/thesis/pointPaintingIntegration/PointPainting:/tmp/PointPainting -- point_painting_rtx3070ti_cu11.7
+$ sudo rocker --nvidia --x11 --env NVIDIA_DRIVER_CAPABILITIES=all --volume ~/Documents/thesis/pointPaintingIntegration/PointPainting:/tmp/PointPainting -- point_painting_rtx3070ti_cu11.7_final
 ```
 
 ### 3.3 Restart Container
 
 ```
-$ sudo docker start -i point_painting_rtx3070ti_cu11.7
+$ sudo docker start -i point_painting_rtx3070ti_cu11.7_final
 ```
 
 ## 4. Using Point Painting
@@ -75,9 +75,6 @@ $ python3 train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml
 ### 4.4 Running Inference
 
 ```
-$ pip3 install mayavi
 $ cd tools
-$ chmod +x /usr/local/lib/python3.7/site-packages/ninja-1.11.1-py3.7-linux-x86_64.egg/ninja/data/bin/ninja
-Check if right version from spconv is used
-$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ${your trained ckpt} --data_path ${painted .npy file} --ext .npy
+$ python3 demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt /tmp/PointPainting/detector/output/kitti_models/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth --data_path /tmp/PointPainting/detector/data/kitti/training/painted_lidar/ --ext .npy
 ```

@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
     libxcb-icccm4 \
     libxcb-image0 \
     libxcb-render-util0 \
+    libdbus-1-3 \
     zlib1g-dev \
     tk-dev \
     openssl \
@@ -85,12 +86,12 @@ python3-pip \
 git
 
 # Upgrade pip
-RUN pip3 install --upgrade pip
+RUN pip install --upgrade pip
 
 # Install pip packages
-RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
 
-RUN pip3 install \
+RUN pip install \
 scipy \
 scikit-image \
 open3d \
@@ -99,23 +100,21 @@ opencv-python-headless \
 tqdm \
 terminaltables \
 numba==0.53.0 \
-spconv-cu117
-
-RUN pip3 install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/torch1.13.0/index.html
+spconv-cu117 \
+mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/torch1.13.0/index.html \
+mayavi \
+pyqt5
 
 # Setting Home ENV for CUDA
 ENV CUDA_HOME "/usr/local/cuda-11.7"
 
-# Installing spconv
-#RUN git clone --recursive https://github.com/traveller59/spconv.git
-#RUN pip3 install -e ./spconv
-
 # Cleaning up
-#RUN rm -rf \
-#Python-3.7.10.tar.xz \
-#cmake-3.13.4.tar.gz \
-#cmake-3.13.4 \
-#spconv
+RUN rm -rf \
+cmake-3.13.4.tar.gz \
+cmake-3.13.4 
 
 # Setting the default shell
 ENV SHELL /bin/bash
+
+# Install OpenPCDet
+RUN python3 PointPainting/detector/setup.py develop
