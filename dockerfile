@@ -47,30 +47,6 @@ RUN cd cmake-3.13.4 && \
     make && \
     make install
 
-# Update Python to 3.7
-# Remove existing Python 3.6 installation
-#RUN apt-get remove -y python3.6 python3.6-dev
-
-# Download and extract Python 3.7 source code
-#RUN wget https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
-#RUN tar xJf Python-3.7.10.tar.xz
-
-# Build and install Python 3.7
-# --enable-optimizations removed build takes too long
-#RUN cd Python-3.7.10 && \
-#    ./configure  && \
-#    make && \
- #   make install
-
-# Make python3.7 the default python
-#RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 1
-
-# Install python3.7-dev version
-#RUN apt-get install -y python3.7-dev
-
-# Remove downloaded source code and unnecessary dependencies
-#RUN rm -rf Python-3.7.10
-
 # Generic python installations
 RUN apt-get update && apt-get install -y \
 python3-pip \
@@ -115,6 +91,3 @@ cmake-3.13.4
 
 # Setting the default shell
 ENV SHELL /bin/bash
-
-# Install OpenPCDet
-RUN python3 PointPainting/detector/setup.py develop
