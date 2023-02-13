@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn8-devel-ubuntu18.04
+FROM nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04
 WORKDIR /tmp
 
 #CU# CUDA
@@ -21,6 +21,16 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     libsqlite3-dev \
     libssl-dev \
+    libxcb-keysyms1 \
+    libxcb-randr0 \
+    libxcb-xinerama0 \ 
+    libxkbcommon-x11-0 \
+    libgl1 \
+    libxcb-xkb1 \ 
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-render-util0 \
+    libdbus-1-3 \
     zlib1g-dev \
     tk-dev \
     openssl \
@@ -39,27 +49,27 @@ RUN cd cmake-3.13.4 && \
 
 # Update Python to 3.7
 # Remove existing Python 3.6 installation
-RUN apt-get remove -y python3.6 python3.6-dev
+#RUN apt-get remove -y python3.6 python3.6-dev
 
 # Download and extract Python 3.7 source code
-RUN wget https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
-RUN tar xJf Python-3.7.10.tar.xz
+#RUN wget https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
+#RUN tar xJf Python-3.7.10.tar.xz
 
 # Build and install Python 3.7
 # --enable-optimizations removed build takes too long
-RUN cd Python-3.7.10 && \
-    ./configure  && \
-    make && \
-    make install
+#RUN cd Python-3.7.10 && \
+#    ./configure  && \
+#    make && \
+ #   make install
 
 # Make python3.7 the default python
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 1
+#RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.7 1
 
 # Install python3.7-dev version
-RUN apt-get install -y python3.7-dev
+#RUN apt-get install -y python3.7-dev
 
 # Remove downloaded source code and unnecessary dependencies
-RUN rm -rf Python-3.7.10
+#RUN rm -rf Python-3.7.10
 
 # Generic python installations
 RUN apt-get update && apt-get install -y \
@@ -76,13 +86,12 @@ python3-pip \
 git
 
 # Upgrade pip
-RUN pip3 install --upgrade pip
+RUN pip install --upgrade pip
 
 # Install pip packages
-RUN pip3 install \
-torch==1.7.0 \
-torchvision==0.8.0 \
-torchaudio==0.7.0 \
+RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117
+
+RUN pip install \
 scipy \
 scikit-image \
 open3d \
@@ -91,21 +100,21 @@ opencv-python-headless \
 tqdm \
 terminaltables \
 numba==0.53.0 \
-mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu101/torch1.7.0/index.html
+spconv-cu117 \
+mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/torch1.13.0/index.html \
+mayavi \
+pyqt5
 
 # Setting Home ENV for CUDA
-ENV CUDA_HOME "/usr/local/cuda-10.1"
-
-# Installing spconv
-RUN git clone -b v1.2.1 --recursive https://github.com/traveller59/spconv.git
-RUN pip3 install -e ./spconv
+ENV CUDA_HOME "/usr/local/cuda-11.7"
 
 # Cleaning up
 RUN rm -rf \
-Python-3.7.10.tar.xz \
 cmake-3.13.4.tar.gz \
-cmake-3.13.4 \
-spconv
+cmake-3.13.4 
 
 # Setting the default shell
 ENV SHELL /bin/bash
+
+# Install OpenPCDet
+RUN python3 PointPainting/detector/setup.py develop
