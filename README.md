@@ -33,6 +33,10 @@ pip install rocker
 $ sudo rocker --nvidia --x11 --env NVIDIA_DRIVER_CAPABILITIES=all --volume ~/Documents/thesis/pointPaintingIntegration/PointPainting:/tmp/PointPainting -- point_painting_rtx3070ti_cu11.7_final
 ```
 
+```
+$ sudo rocker --nvidia --x11 --env NVIDIA_DRIVER_CAPABILITIES=all --volume /mnt/d/git/pointPaintingIntegration/PointPainting:/tmp/PointPainting -- point_painting_rtx3070ti_cu11.7_final
+```
+
 ### 3.3 Restart Container
 
 ```
