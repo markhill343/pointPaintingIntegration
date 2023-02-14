@@ -2,7 +2,7 @@ FROM nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04
 WORKDIR /tmp
 
 #CU# CUDA
-ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,display
 ENV NVIDIA_VISIBLE_DEVICES=all
 
 # Run dpkg without interactive dialog
@@ -91,3 +91,6 @@ cmake-3.13.4
 
 # Setting the default shell
 ENV SHELL /bin/bash
+
+#Updating
+RUN apt-get update
