@@ -1,9 +1,11 @@
-FROM nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.7.0-cudnn8-devel-ubuntu22.04
 WORKDIR /tmp
 
-#CU# CUDA
+# Setting Envrioment 
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,display
 ENV NVIDIA_VISIBLE_DEVICES=all
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
 
 # Run dpkg without interactive dialog
 ARG DEBIAN_FRONTEND=noninteractive
@@ -80,6 +82,18 @@ spconv-cu117 \
 mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/torch1.13.0/index.html \
 mayavi \
 pyqt5
+
+RUN apt update
+RUN apt install software-properties-common
+RUN add-apt-repository universe
+
+RUN apt update && apt install curl
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null
+
+RUN apt update && apt upgrade
+
 
 # Setting Home ENV for CUDA
 ENV CUDA_HOME "/usr/local/cuda-11.7"
